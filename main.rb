@@ -5,7 +5,7 @@ JANKENHANDS = ['g','c','p']
 NUMBEROFMATCHES = [1,3,5]
 
 def create_number_of_matchs
- puts '何本勝負？(press 1 or 3 or 5)'
+ puts "何本勝負？(press #{NUMBEROFMATCHES.join(' or ')})"
  number = gets.chomp.to_i
  puts "#{number}本勝負を選びました"
  return number 
@@ -17,40 +17,33 @@ def do_rock_paper_scissor(number_of_matchs)
     num = 0
     while num < number_of_matchs  do
       puts "#{num + 1}本目"
-      puts 'じゃんけん…(press g or c or p)'
+      puts "じゃんけん…(press #{JANKENHANDS.join(' or ')})"
       $cpu_hands = JANKENHANDS[rand(0..2)]
       $my_hands = gets.chomp.to_s
 
       if $my_hands == $cpu_hands 
         aiko
       end
-
+      
       if $my_hands != $cpu_hands 
         show_hand
       end
-      #グーの場合
-      if $my_hands == 'g' && $cpu_hands == 'c'
+
+      #結果の判定
+      if $my_hands == 'g' && $cpu_hands == 'c' ||$my_hands == 'c' && $cpu_hands == 'p' || $my_hands == 'p' && $cpu_hands == 'g'
         victory += 1
-      elsif  $my_hands == 'g' && $cpu_hands == 'p'
-        defeat += 1
+        puts "勝ち！"
       end
 
-      #チョキの場合
-      if $my_hands == 'c' && $cpu_hands == 'p'
-        victory += 1
-      elsif  $my_hands == 'c' && $cpu_hands == 'g'
+      if $my_hands == 'g' && $cpu_hands == 'p' || $my_hands == 'c' && $cpu_hands == 'g' || $my_hands == 'p' && $cpu_hands == 'c'
         defeat += 1
+        puts "負け！"
       end
 
-      #パーの場合
-      if $my_hands == 'p' && $cpu_hands == 'g'
-        victory += 1
-      elsif  $my_hands == 'p' && $cpu_hands == 'c'
-        defeat += 1
-      end
       puts "#{victory}勝#{defeat}敗"
       num += 1
     end
+
     if victory > defeat
         puts "結果\n#{victory}勝#{defeat}敗であなたの勝ち"
     else 
@@ -61,7 +54,7 @@ end
 
 def aiko 
     show_hand
-    puts 'あいこで…(press g or c or p)'
+    puts "あいこで...(press #{JANKENHANDS.join(' or ')})"
     $cpu_hands = JANKENHANDS[rand(0..2)]
     $my_hands = gets.chomp.to_s
     if $my_hands == $cpu_hands 
@@ -86,6 +79,5 @@ def show_hand
         puts 'あなた…パー'
     end
 end
-
 number_of_matchs = create_number_of_matchs
 do_rock_paper_scissor(number_of_matchs)
