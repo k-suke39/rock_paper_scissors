@@ -19,16 +19,15 @@ def do_rock_paper_scissor(number_of_matches)
   while num < number_of_matches do
     puts "#{num + 1}本目"
     puts "じゃんけん…(press #{JANKENHANDS.join(' or ')})"
-    $cpu_hands = JANKENHANDS[rand(0..2)]
-    $my_hands = gets.chomp.to_s
-
-    hands_exists($my_hands)
+    @cpu_hands = JANKENHANDS[rand(0..2)]
+    @my_hands = gets.chomp.to_s
+    hands_exists(@my_hands)
     #結果の判定
-    if $my_hands == HAND_GU && $cpu_hands == HAND_CHOKI ||$my_hands == HAND_CHOKI && $cpu_hands == HAND_PA || $my_hands == HAND_PA && $cpu_hands == HAND_GU
+    if @my_hands == HAND_GU && @cpu_hands == HAND_CHOKI || @my_hands == HAND_CHOKI && @cpu_hands == HAND_PA || @my_hands == HAND_PA && @cpu_hands == HAND_GU
       victory += 1
       puts "勝ち！"
     end
-    if $my_hands == HAND_GU && $cpu_hands == HAND_PA || $my_hands == HAND_CHOKI && $cpu_hands == HAND_GU || $my_hands == HAND_PA && $cpu_hands == HAND_CHOKI
+    if @my_hands == HAND_GU && @cpu_hands == HAND_PA || @my_hands == HAND_CHOKI && @cpu_hands == HAND_GU || @my_hands == HAND_PA && @cpu_hands == HAND_CHOKI
       defeat += 1
       puts "負け！"
     end
@@ -45,24 +44,24 @@ end
 def aiko 
   show_hand 
   puts "あいこで...(press #{JANKENHANDS.join(' or ')})"
-  $cpu_hands = JANKENHANDS[rand(0..2)]
-  $my_hands = gets.chomp.to_s
-  hands_exists($my_hands)
+  @cpu_hands = JANKENHANDS[rand(0..2)]
+  @my_hands = gets.chomp.to_s
+  hands_exists(@my_hands)
 end
 
 def show_hand
-  if $cpu_hands == HAND_GU
+  if @cpu_hands == HAND_GU
     puts 'CPU…グー'
-  elsif $cpu_hands == HAND_CHOKI
+  elsif @cpu_hands == HAND_CHOKI
     puts 'CPU…チョキ'
-  elsif  $cpu_hands == HAND_PA
+  elsif  @cpu_hands == HAND_PA
     puts 'CPU…パー'
   end
-  if $my_hands == HAND_GU
+  if @my_hands == HAND_GU
     puts 'あなた…グー'
-  elsif $my_hands == HAND_CHOKI
+  elsif @my_hands == HAND_CHOKI
     puts 'あなた…チョキ'
-  elsif  $my_hands == HAND_PA
+  elsif  @my_hands == HAND_PA
     puts 'あなた…パー'
   end
 end  
@@ -79,7 +78,7 @@ end
 
 def hands_exists(hands)
   if JANKENHANDS.include?(hands)
-    if hands == $cpu_hands 
+    if hands == @cpu_hands 
       aiko
     else
       show_hand
