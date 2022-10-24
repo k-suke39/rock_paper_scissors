@@ -1,5 +1,3 @@
-$cpu_hands = ''
-$my_hands = ''
 HAND_GU = "g"
 HAND_CHOKI = "c"
 HAND_PA = "p"
