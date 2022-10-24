@@ -6,17 +6,17 @@ HAND_PA = "p"
 JANKENHANDS = [HAND_GU,HAND_CHOKI,HAND_PA]
 NUMBEROFMATCHES = [1,3,5]
 
-def create_number_of_matchs
+def create_number_of_matches
   puts "何本勝負？(press #{NUMBEROFMATCHES.join(' or ')})"
   number = gets.chomp.to_i
   puts "#{number}本勝負を選びました"
 end
 
-def do_rock_paper_scissor(number_of_matchs)
+def do_rock_paper_scissor(number_of_matches)
   victory = 0
   defeat = 0
   num = 0
-  while num < number_of_matchs do
+  while num < number_of_matches do
     puts "#{num + 1}本目"
     puts "じゃんけん…(press #{JANKENHANDS.join(' or ')})"
     $cpu_hands = JANKENHANDS[rand(0..2)]
@@ -72,6 +72,6 @@ def show_hand
   elsif  $my_hands == HAND_PA
     puts 'あなた…パー'
   end
-end
-number_of_matchs = create_number_of_matchs
-do_rock_paper_scissor(number_of_matchs)
+end  
+number_of_matches = create_number_of_matches
+do_rock_paper_scissor(number_of_matches)
