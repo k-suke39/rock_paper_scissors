@@ -9,7 +9,7 @@ NUMBEROFMATCHES = [1,3,5]
 def create_number_of_matches
   puts "何本勝負？(press #{NUMBEROFMATCHES.join(' or ')})"
   number = gets.chomp.to_i
-  puts "#{number}本勝負を選びました"
+  number_exists(number)
 end
 
 def do_rock_paper_scissor(number_of_matches)
@@ -22,12 +22,7 @@ def do_rock_paper_scissor(number_of_matches)
     $cpu_hands = JANKENHANDS[rand(0..2)]
     $my_hands = gets.chomp.to_s
 
-    if $my_hands == $cpu_hands 
-      aiko
-    end
-    if $my_hands != $cpu_hands 
-      show_hand
-    end
+    hands_exists($my_hands)
     #結果の判定
     if $my_hands == HAND_GU && $cpu_hands == HAND_CHOKI ||$my_hands == HAND_CHOKI && $cpu_hands == HAND_PA || $my_hands == HAND_PA && $cpu_hands == HAND_GU
       victory += 1
@@ -52,9 +47,7 @@ def aiko
   puts "あいこで...(press #{JANKENHANDS.join(' or ')})"
   $cpu_hands = JANKENHANDS[rand(0..2)]
   $my_hands = gets.chomp.to_s
-  if $my_hands == $cpu_hands 
-    aiko
-  end
+  hands_exists($my_hands)
 end
 
 def show_hand
@@ -73,5 +66,30 @@ def show_hand
     puts 'あなた…パー'
   end
 end  
+
+def number_exists(number)
+  if NUMBEROFMATCHES.include?(number)
+    puts "#{number}本勝負を選びました"
+    number
+  else
+    puts "#{NUMBEROFMATCHES.join(',')}のいずれかの値を入力してください"
+    create_number_of_matches
+  end
+end
+
+def hands_exists(hands)
+  if JANKENHANDS.include?(hands)
+    if hands == $cpu_hands 
+      aiko
+    else
+      show_hand
+    end
+  else
+    puts "#{JANKENHANDS.join(',')}のいずれかの値を入力してください"
+    hands = gets.chomp.to_s
+    hands_exists(hands)
+  end
+end
+
 number_of_matches = create_number_of_matches
 do_rock_paper_scissor(number_of_matches)
