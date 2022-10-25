@@ -20,6 +20,13 @@ def do_rock_paper_scissor(number_of_matches)
     @cpu_hands = JANKENHANDS[rand(0..2)]
     @my_hands = gets.chomp.to_s
     hands_exists(@my_hands)
+
+    if @my_hands == @cpu_hands 
+      aiko
+    else
+      show_hand
+    end
+
     #結果の判定
     if @my_hands == HAND_GU && @cpu_hands == HAND_CHOKI || @my_hands == HAND_CHOKI && @cpu_hands == HAND_PA || @my_hands == HAND_PA && @cpu_hands == HAND_GU
       victory += 1
@@ -76,11 +83,7 @@ end
 
 def hands_exists(hands)
   if JANKENHANDS.include?(hands)
-    if hands == @cpu_hands 
-      aiko
-    else
-      show_hand
-    end
+    true
   else
     puts "#{JANKENHANDS.join(',')}のいずれかの値を入力してください"
     hands = gets.chomp.to_s
